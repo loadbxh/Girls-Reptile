@@ -37,10 +37,4 @@ branches:
   only:
   - master
 after_script:
-  - cd docs/dist
-  - git init
-  - git config user.name "Licoy"
-  - git config user.email "licoycn@gmail.com"
-  - git add .
-  - git commit -m "Travis build docs"
-  - git push  --force --quiet "https://${GH_TOKEN}@github.com/Licoy/girls-reptile.git" master:gh-pages
+  
