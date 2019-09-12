@@ -116,10 +116,9 @@ function createWindow () {
   ipcMain.on('min', ()=> mainWindow.minimize());
 
   createAppMenu(mainWindow)
-  createDockMenu(mainWindow)
-
-  
-
+  if(process.platform == 'win32'){
+    createDockMenu(mainWindow)
+  }
 }
 
 
