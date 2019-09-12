@@ -72,7 +72,7 @@
             </div>
             <Divider />
             <div>
-                <!-- <div v-if="!loading && (!reptile.data || reptile.data.length==0) " style="width:100%;text-align:center">
+                <div v-if="!loading && (!reptile.data || reptile.data.length==0) " style="width:100%;text-align:center">
                     <Icon type="md-clock" :size='100'/>
                     <p class="mt10">准备就绪，点击「立即进行自动采集」开始工作</p>
                 </div>
@@ -86,9 +86,6 @@
                         <Alert show-icon type="success" v-else-if="item.status==1">【采集成功】{{item.name}}</Alert>
                         <Alert show-icon type="warning" v-else-if="item.status==2">【采集异常】{{item.name}}</Alert>
                     </template>
-                </div>-->
-                <div id="records">
-                    <Alert show-icon v-for="i in 100">【准备就绪】{{i}}</Alert>
                 </div>
             </div>
         </div>

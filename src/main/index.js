@@ -102,7 +102,7 @@ function createWindow () {
     transparent: true,
     backgroundColor: '#fff',
     webPreferences: {webSecurity: false},
-    // frame: false,
+    frame: false,
     titleBarStyle: 'hidden'
 
   })
@@ -116,7 +116,7 @@ function createWindow () {
   ipcMain.on('min', ()=> mainWindow.minimize());
 
   createAppMenu(mainWindow)
-  if(process.platform == 'win32'){
+  if(process.platform != 'win32'){
     createDockMenu(mainWindow)
   }
 }
