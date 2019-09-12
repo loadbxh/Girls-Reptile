@@ -137,7 +137,7 @@ export default {
     },
     data(){
         return {
-            version:'1.0',
+            version:'1.0.0',
             model:'image',
             os:null,
             loading:false,
@@ -211,7 +211,7 @@ export default {
             ipcRenderer.send('config-update', {})
             this.$store.commit('TIMEOUT', this.config.timeout);
         },
-        checkUpdate(){
+        async checkUpdate(){
             const compareVersion2Update = (current, latest) => {
                 const currentVersion = current.split('.').map(item => parseInt(item))
                 const latestVersion = latest.split('.').map(item => parseInt(item))
@@ -227,10 +227,25 @@ export default {
                 content: '检查更新中',
                 duration: 0
             });
-            setTimeout(()=>{
+            try {
+                let res = await this.$http.get('https://api.github.com/repos/Licoy/girls-reptile/releases/latest')
+                if(compareVersion2Update('v'+this.version,res.data.tag_name)){
+                    load()
+                    this.$Modal.confirm({
+                        title: '提示',
+                        content: '<p>检测到有新的版本，是否立即前往更新？</p>',
+                        onOk: () => {
+                            this.openUrl('https://github.com/Licoy/girls-reptile/releases')
+                        }
+                    });
+                }else{
+                    load()
+                    this.$Message.success("当前已是最新版本！");
+                }
+            } catch (error) {
                 load()
-                this.$Message.success("当前已是最新版本！")
-            }, 3000);
+                this.$Message.error("获取版本信息失败");
+            }
         },
         onTitleMenuClick(name){
             if(name=='checkUpdate'){
