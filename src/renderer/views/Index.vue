@@ -72,20 +72,23 @@
             </div>
             <Divider />
             <div>
-                <div v-if="!loading && (!reptile.data || reptile.data.length==0) " style="width:100%;text-align:center">
+                <!-- <div v-if="!loading && (!reptile.data || reptile.data.length==0) " style="width:100%;text-align:center">
                     <Icon type="md-clock" :size='100'/>
                     <p class="mt10">准备就绪，点击「立即进行自动采集」开始工作</p>
                 </div>
                 <div v-else-if="loading && (!reptile.data || reptile.data.length==0) " style="width:100%;text-align:center">
                     <Icon class="ivu-load-loop" type="md-refresh" :size='100'/>
                     <p class="mt10">页面分析中，稍等片刻就可以看到工作进度~</p>
-                </div>
-                <div v-else>
+                </div> 
+                <div v-else id="records">
                     <template v-for="(item,index) in reptile.data" >
                         <Alert show-icon v-if="item.status==0">【准备就绪】{{item.name}}</Alert>
                         <Alert show-icon type="success" v-else-if="item.status==1">【采集成功】{{item.name}}</Alert>
                         <Alert show-icon type="warning" v-else-if="item.status==2">【采集异常】{{item.name}}</Alert>
                     </template>
+                </div>-->
+                <div id="records">
+                    <Alert show-icon v-for="i in 100">【准备就绪】{{i}}</Alert>
                 </div>
             </div>
         </div>
@@ -212,6 +215,17 @@ export default {
             this.$store.commit('TIMEOUT', this.config.timeout);
         },
         checkUpdate(){
+            const compareVersion2Update = (current, latest) => {
+                const currentVersion = current.split('.').map(item => parseInt(item))
+                const latestVersion = latest.split('.').map(item => parseInt(item))
+                let flag = false
+                for (let i = 0; i < 3; i++) {
+                    if (currentVersion[i] < latestVersion[i]) {
+                    flag = true
+                    }
+                }
+                return flag
+            }
             const load = this.$Message.loading({
                 content: '检查更新中',
                 duration: 0
@@ -258,6 +272,7 @@ export default {
         padding:10px
     }
     .title-bar{
+        -webkit-app-region: drag;
         text-align: center;
         height: 10px;
         padding:5px 0px 10px 0px;
@@ -270,11 +285,16 @@ export default {
         font-size: 14px;
     }
     .handle-bar{
+        -webkit-app-region: no-drag;
         position: fixed;
         top:2px;
         right:10px;
     }
     .mt10{
         margin-top:10px;
+    }
+    #records{
+        height: 455px;
+        overflow:scroll
     }
 </style>

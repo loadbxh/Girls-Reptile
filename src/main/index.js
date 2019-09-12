@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, Menu, ipcRenderer } from 'electron'
+import { app, BrowserWindow, ipcMain, Menu, globalShortcut } from 'electron'
 const DownloadManager = require("electron-download-manager");
 import db from '../db/database'
 /**
@@ -127,9 +127,7 @@ function createWindow () {
 app.on('ready', createWindow)
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+  globalShortcut.unregisterAll()
 })
 
 app.on('activate', () => {
