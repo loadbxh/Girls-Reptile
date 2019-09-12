@@ -26,6 +26,8 @@
     "chalk": "^2.4.2",
     "cheerio": "^1.0.0-rc.3",
     "electron-download-manager": "^2.1.2",
+    "fs": "0.0.1-security",
+    "fs-extra": "^8.1.0",
     "iview": "^3.5.0",
     "lowdb": "^1.0.0",
     "sleepjs": "^3.0.1",
