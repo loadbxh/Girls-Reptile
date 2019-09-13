@@ -91,7 +91,7 @@
         </div>
         <Modal title="关于我们" v-model="showAbout">
             <p class="fs14">软件名称：GirlsReptile</p>
-            <p class="fs14">项目主页：<a @click="openUrl('https://github.com/Licoy/GirlsReptile')">https://github.com/Licoy/GirlsReptile</a></p>
+            <p class="fs14">项目主页：<a @click="openUrl('https://github.com/Licoy/girls-reptile')">https://github.com/Licoy/girls-reptile</a></p>
             <p class="fs14">使用声明：此项目仅供学习交流使用，请勿使用于商业及非法用途，具体条款请参见于项目主页。</p>
         </Modal>
     </div>
