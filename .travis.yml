@@ -36,3 +36,6 @@ script:
 branches:
   only:
   - master
+deploy:
+  on:
+    tags: true

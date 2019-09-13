@@ -6,6 +6,11 @@ branches:
   only:
     - master
 
+provider: Environment
+  name: production
+  on:
+    APPVEYOR_REPO_TAG: false
+
 image: Visual Studio 2017
 platform:
   - x64
