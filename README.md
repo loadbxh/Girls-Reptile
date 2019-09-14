@@ -42,3 +42,9 @@ GirlsReptile是基于electron-vue开发的美图搜罗器
 此项目仅供学习交流使用，请勿使用于商业及非法用途，若违反使用条例请自行承担相关后果
 ## 资源说明
 本程序所有资源均来自于互联网，若侵犯到您的权利，请提交issue我们将核对完成第一时间删除相关内容。
+## 讨论
+- QQ群：30261540  &nbsp; [点我加入QQ群讨论](https://shang.qq.com/wpa/qunwpa?idkey=c3541f1d0dbe443456228e3aebf23f6795b614a94d5df6a32f0b2b1c759bb99b)
+
+- 作者博客：[https://www.licoy.cn](https://www.licoy.cn)
+
+![讨论](./docs/image/discuss.png)
