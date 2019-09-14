@@ -58,13 +58,13 @@
                             <Input :value="config.saveDir" :disabled="loading" @on-search="selectSaveDir" style="width:300px" search enter-button placeholder="请选择保存目录" readonly />
                         </template>
                     </FormItem>
-                    <FormItem>
+                    <FormItem label='区分目录'>
                         <template>
-                            <!-- <i-switch :disabled="loading" @on-change="saveConfig" size="large" v-model='config.autoCollect'>
+                            <i-switch :disabled="loading" @on-change="saveConfig" size="large" v-model='config.diffDirectory'>
                                 <span slot="open">开启</span>
                                 <span slot="close">关闭</span>
-                            </i-switch> -->
-                            <Button v-if="!loading" @click="getData" type="success">立即进行自动采集</Button>
+                            </i-switch>
+                            <Button v-if="!loading" @click="getData" type="success" style="margin-left:10px">立即进行自动采集</Button>
                             <Button v-else @click="stopRunning" type="error" style="margin-left:10px">立即停止采集</Button>
                         </template>
                     </FormItem>
@@ -118,6 +118,7 @@ export default {
         this.os = process.platform
         this.$store.commit('STOP');
         this.config = this.$db.get('config').value()
+        this.saveConfig(true)
         this.reptile.origin = this.getSourceTags(this.originSource[this.config.siteIndex].key)
         ipcRenderer.on('download-success', (event, arg) => {
             this.reptile.data[arg.index].status = 1;
@@ -132,8 +133,9 @@ export default {
             this.reptile.msgCurrent = arg.msg;
         })
         ipcRenderer.on('sys-check-update', (event, arg) => {
-            this.checkUpdate()
+            this.checkUpdate(true)
         })
+        this.checkUpdate(false)
     },
     data(){
         return {
@@ -209,9 +211,11 @@ export default {
         saveConfig(){
             this.$db.set('config',this.config).write()
             ipcRenderer.send('config-update', {})
+            ipcRenderer.send('download-diff-dir-change', this.config.diffDirectory)
             this.$store.commit('TIMEOUT', this.config.timeout);
+            this.$store.commit('DIFF_DIR', this.config.diffDirectory);
         },
-        async checkUpdate(){
+        async checkUpdate(showLoading=true){
             const compareVersion2Update = (current, latest) => {
                 const currentVersion = current.split('.').map(item => parseInt(item))
                 const latestVersion = latest.split('.').map(item => parseInt(item))
@@ -223,33 +227,40 @@ export default {
                 }
                 return flag
             }
-            const load = this.$Message.loading({
-                content: '检查更新中',
-                duration: 0
-            });
+            let load = () => {}
+            if(showLoading){
+                 load = this.$Message.loading({
+                    content: '检查更新中',
+                    duration: 0
+                });
+            }
             try {
                 let res = await this.$http.get('https://api.github.com/repos/Licoy/girls-reptile/releases/latest')
                 if(compareVersion2Update('v'+this.version,res.data.tag_name)){
                     load()
                     this.$Modal.confirm({
                         title: '提示',
-                        content: '<p>检测到有新的版本，是否立即前往更新？</p>',
+                        content: '<p>检测到有新的版本'+res.data.tag_name+'，是否立即前往更新？</p>',
                         onOk: () => {
                             this.openUrl('https://github.com/Licoy/girls-reptile/releases')
                         }
                     });
                 }else{
                     load()
-                    this.$Message.success("当前已是最新版本！");
+                    if(showLoading){
+                        this.$Message.success("当前已是最新版本！");
+                    }
                 }
             } catch (error) {
                 load()
-                this.$Message.error("获取版本信息失败");
+                if(showLoading){
+                    this.$Message.error("获取版本信息失败");
+                }
             }
         },
         onTitleMenuClick(name){
             if(name=='checkUpdate'){
-                this.checkUpdate()
+                this.checkUpdate(true)
             }else if(name=='restart'){
                 this.$Modal.confirm({
                     title: '提示',

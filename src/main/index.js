@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain, Menu, globalShortcut } from 'electron'
 const DownloadManager = require("electron-download-manager");
 import db from '../db/database'
+import store from '../renderer/store'
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
@@ -17,6 +18,7 @@ const winURL = process.env.NODE_ENV === 'development'
 
 function createDownloadManager(){
   const globalConfig = db.get('config').value()
+  let diffDir = globalConfig.diffDirectory==undefined ? true : globalConfig.diffDirectory
   DownloadManager.register({downloadFolder: globalConfig.saveDir});
   ipcMain.on('download-list', async (event, args) => {
     event.sender.send('download-list', args)
@@ -30,11 +32,16 @@ function createDownloadManager(){
   ipcMain.on('download-current', async (event, args) => {
     event.sender.send('download-current', args)
   })
+  ipcMain.on('download-diff-dir-change', async (event, args) => {
+    diffDir = args
+  })
   ipcMain.on('download-button', async (event, {url,name, headers}) => {
     if(!headers) headers = []
+    let path = diffDir ? name : '/'
+    console.error('DiffDIR: '+diffDir)
     DownloadManager.bulkDownload({
         urls: [url],
-        path: name,
+        path: path,
         headers: headers
     }, function (error, finished, errors) {
         if (error) {

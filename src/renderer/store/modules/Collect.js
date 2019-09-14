@@ -1,6 +1,7 @@
 const state = {
     running: false,
-    timeout: 10
+    timeout: 10,
+    diffDirectory: true
 }
 
 const mutations = {
@@ -12,6 +13,9 @@ const mutations = {
     },
     TIMEOUT(state, param){
         state.timeout = param
+    },
+    DIFF_DIR(state, param){
+        state.diffDirectory = param
     }
 }
 
