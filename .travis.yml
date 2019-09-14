@@ -5,6 +5,7 @@ language: c
 matrix:
   include:
   - os: osx
+if: tag IS present
 cache:
   directories:
   - node_modules
@@ -33,9 +34,3 @@ script:
 #- xvfb-maybe node_modules/.bin/karma start test/unit/karma.conf.js
 #- yarn run pack && xvfb-maybe node_modules/.bin/mocha test/e2e
 - npm run release
-branches:
-  only:
-  - master
-deploy:
-  on:
-    tags: true
