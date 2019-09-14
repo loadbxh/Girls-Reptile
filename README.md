@@ -14,13 +14,24 @@
       <a href="https://github.com/Licoy/girls-reptile/releases/latest">
         <img src="https://img.shields.io/github/release/Licoy/girls-reptile.svg?style=flat-square" alt="">
       </a>
+    <a href="https://github.com/Licoy/girls-reptile/issues">
+        <img src="https://img.shields.io/github/issues/Licoy/girls-reptile.svg" alt="">
+      </a>
+    <a href="https://github.com/Licoy/girls-reptile/pulls">
+        <img src="https://img.shields.io/github/issues-pr/Licoy/girls-reptile.svg" alt="">
+      </a>
+    <a href="https://github.com/Licoy">
+        <img src="https://img.shields.io/badge/author-Licoy-ff69b4.svg" alt="">
+      </a>
 </div>
 
 ## 应用介绍
 GirlsReptile是基于electron-vue开发的美图搜罗器
 ## 下载安装
 您可以[点击此处](https://github.com/Licoy/girls-reptile/releases)进行下载安装，支持Mac/Windows/Linux(未测试)
-## 使用截图
+## 开发折腾
+- [《关于在travis-ci以及appveyor条件构建遇到的坑》](https://www.licoy.cn/3385.html)
+## 使用截图（V1.0.0版本，请以最新版本为准）
 ### Mac
 ![mac](./docs/image/mac-1.png)
 ![mac](./docs/image/mac-2.png)
