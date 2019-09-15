@@ -31,6 +31,11 @@ GirlsReptile是基于electron-vue开发的美图搜罗器
 您可以[点击此处](https://github.com/Licoy/girls-reptile/releases)进行下载安装，支持Mac/Windows/Linux(未测试)
 ## 开发折腾
 - [《关于在travis-ci以及appveyor条件构建遇到的坑》](https://www.licoy.cn/3385.html)
+## 采集源站
+- [7106图片大全](https://www.7160.com)
+- [美图录](https://www.meitulu.com)
+- [居然搞笑网](https://www.zbjuran.net)
+- > [什么？你有更好的网址？点我提交以支持适配](./issues/new)
 ## 使用截图（V1.0.0版本，请以最新版本为准）
 ### Mac
 ![mac](./docs/image/mac-1.png)
