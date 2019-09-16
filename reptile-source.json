@@ -1,0 +1,223 @@
+[
+
+    {
+        "name": "quantuwang", 
+        "key":"quantuwang",
+        "url": "http://www.quantuwang.co", 
+        "tags": [
+            {"name":"秀人网","url":"http://www.quantuwang.co/meinv/xiuren/"},
+            {"name":"美媛馆","url":"http://www.quantuwang.co/meinv/mygirl/"},
+            {"name":"模范学院","url":"http://www.quantuwang.co/meinv/mfstar/"},
+            {"name":"嗲囡囡","url":"http://www.quantuwang.co/meinv/feilin/"},
+            {"name":"花の颜","url":"http://www.quantuwang.co/meinv/huayan/"},
+            {"name":"爱蜜社","url":"http://www.quantuwang.co/meinv/imiss/"},
+            {"name":"星乐园","url":"http://www.quantuwang.co/meinv/leyuan/"},
+            {"name":"蜜桃社","url":"http://www.quantuwang.co/meinv/miitao/"},
+            {"name":"魅妍社","url":"http://www.quantuwang.co/meinv/mistar/"},
+            {"name":"尤物馆","url":"http://www.quantuwang.co/meinv/youwu/"},
+            {"name":"顽味生活","url":"http://www.quantuwang.co/meinv/taste/"},
+            {"name":"兔几盟","url":"http://www.quantuwang.co/meinv/tukmo/"},
+            {"name":"优星馆","url":"http://www.quantuwang.co/meinv/uxing/"},
+            {"name":"影私荟","url":"http://www.quantuwang.co/meinv/wings/"},
+            {"name":"DK御女郎","url":"http://www.quantuwang.co/meinv/dkgirl/"},
+            {"name":"尤蜜荟","url":"http://www.quantuwang.co/meinv/youmi/"},
+            {"name":"薄荷叶","url":"http://www.quantuwang.co/meinv/mintye/"},
+            {"name":"糖果画报","url":"http://www.quantuwang.co/meinv/candy/"},
+            {"name":"猫萌榜","url":"http://www.quantuwang.co/meinv/micat/"},
+            {"name":"瑞丝馆","url":"http://www.quantuwang.co/meinv/ruisg/"},
+            {"name":"星颜社","url":"http://www.quantuwang.co/meinv/xingyan/"},
+            {"name":"模特联盟","url":"http://www.quantuwang.co/meinv/mtmeng/"},
+            {"name":"花漾show","url":"http://www.quantuwang.co/meinv/huayang/"},
+            {"name":"语画界","url":"http://www.quantuwang.co/meinv/xiaoyu/"},
+            {"name":"波萝社","url":"http://www.quantuwang.co/meinv/bololi/"},
+            {"name":"激萌文化","url":"http://www.quantuwang.co/meinv/kimoe/"},
+            {"name":"村长的宝物","url":"http://www.quantuwang.co/meinv/cuz/"},
+            {"name":"萌缚","url":"http://www.quantuwang.co/meinv/mf/"},
+            {"name":"尤果网","url":"http://www.quantuwang.co/meinv/ugirls/"},
+            {"name":"爱尤物","url":"http://www.quantuwang.co/meinv/ugirlsapp/"},
+            {"name":"轰趴猫","url":"http://www.quantuwang.co/meinv/partycat/"},
+            {"name":"潘多拉","url":"http://www.quantuwang.co/meinv/pdlone/"},
+            {"name":"雅拉伊","url":"http://www.quantuwang.co/meinv/yalayi/"},
+            {"name":"猎女神","url":"http://www.quantuwang.co/meinv/slady/"},
+            {"name":"尤美网","url":"http://www.quantuwang.co/meinv/youmei/"},
+            {"name":"阳光宝贝","url":"http://www.quantuwang.co/meinv/sungirl/"},
+            {"name":"果团网","url":"http://www.quantuwang.co/meinv/girlt/"},
+            {"name":"风之领域","url":"http://www.quantuwang.co/meinv/fzly/"},
+            {"name":"MT蜜团","url":"http://www.quantuwang.co/meinv/mtgirl/"},
+            {"name":"青豆客","url":"http://www.quantuwang.co/meinv/qingdouke/"},
+            {"name":"推女神","url":"http://www.quantuwang.co/meinv/tgod/"},
+            {"name":"头条女神","url":"http://www.quantuwang.co/meinv/toutiaogirls/"},
+            {"name":"ROSI","url":"http://www.quantuwang.co/meinv/rosi/"},
+            {"name":"ROSI口罩","url":"http://www.quantuwang.co/meinv/rosikz/"},
+            {"name":"ROSI情趣","url":"http://www.quantuwang.co/meinv/rosiqq/"},
+            {"name":"ROSI艺学妹","url":"http://www.quantuwang.co/meinv/rosiyxm/"}
+        ], 
+        "pages": {
+            "element": ".index_left li", 
+            "name": {
+                "element": "a",
+                "attr": "title"
+            },
+            "url": {
+                "element": "a",
+                "attr": "href",
+                "needMerge": true
+            },
+            "nextPageUrlMode": {
+                "mode": "add", 
+                "addValue": "index_{page}.html"
+            }, 
+            "lastPage": {
+                "element": ".c_page a", 
+                "minPageLength": 2, 
+                "attr": "@text", 
+                "descIndex": 1, 
+                "isNeedSplit": false, 
+                "splits": []
+            }
+        }, 
+        "imgs": {
+            "element": ".c_img img", 
+            "nextPageUrlMode": {
+                "incrementMode": "image",
+                "imageSuffix":"jpg"
+            }, 
+            "lastPage": {
+                "element": ".c_page a", 
+                "minPageLength": 2, 
+                "attr": "@text", 
+                "descIndex": 1, 
+                "isNeedSplit": false, 
+                "splits": []
+            }
+        }, 
+        "supportReptileVersion": 1
+    },
+    {
+        "name": "美图录", 
+        "key":"meitulu",
+        "url": "https://www.meitulu.com", 
+        "tags": [
+            {"name": "女神", "url": "https://www.meitulu.com/t/nvshen/"}, 
+            {"name": "极品", "url": "https://www.meitulu.com/t/jipin/"},
+            {"name": "嫩模", "url": "https://www.meitulu.com/t/nenmo/"},
+            {"name": "网红", "url": "https://www.meitulu.com/t/wangluohongren/"},
+            {"name": "风俗娘", "url": "https://www.meitulu.com/t/fengsuniang/"},
+            {"name": "气质", "url": "https://www.meitulu.com/t/qizhi/"},
+            {"name": "尤物", "url": "https://www.meitulu.com/t/youwu/"},
+            {"name": "爆乳", "url": "https://www.meitulu.com/t/baoru/"},
+            {"name": "性感", "url": "https://www.meitulu.com/t/xinggan/"},
+            {"name": "诱惑", "url": "https://www.meitulu.com/t/youhuo/"},
+            {"name": "美胸", "url": "https://www.meitulu.com/t/meixiong/"},
+            {"name": "少妇", "url": "https://www.meitulu.com/t/shaofu/"},
+            {"name": "长腿", "url": "https://www.meitulu.com/t/changtui/"},
+            {"name": "萌妹子", "url": "https://www.meitulu.com/t/mengmeizi/"},
+            {"name": "萝莉", "url": "https://www.meitulu.com/t/loli/"},
+            {"name": "可爱", "url": "https://www.meitulu.com/t/keai/"},
+            {"name": "户外", "url": "https://www.meitulu.com/t/huwai/"},
+            {"name": "比基尼", "url": "https://www.meitulu.com/t/bijini/"},
+            {"name": "清纯", "url": "https://www.meitulu.com/t/qingchun/"},
+            {"name": "唯美", "url": "https://www.meitulu.com/t/weimei/"},
+            {"name": "清新", "url": "https://www.meitulu.com/t/qingxin/"}
+        ], 
+        "pages": {
+            "element": "body > div.main > div.boxs > ul > li", 
+            "name": {
+                "element": "p.p_title > a",
+                "attr": "@text"
+            },
+            "url": {
+                "element": "p.p_title > a",
+                "attr": "href",
+                "needMerge": false
+            },
+            "nextPageUrlMode": {
+                "mode": "add", 
+                "replaceSearchValue": ".html", 
+                "replaceValue": "_{page}.html", 
+                "addValue": "{page}.html"
+            }, 
+            "lastPage": {
+                "element": "#pages > a", 
+                "minPageLength": 2, 
+                "attr": "@text", 
+                "descIndex": 2, 
+                "isNeedSplit": false, 
+                "splits": []
+            }
+        }, 
+        "imgs": {
+            "element": "body > div.content > center > img", 
+            "nextPageUrlMode": {
+                "incrementMode": "page",
+                "mode": "replace", 
+                "replaceSearchValue": ".html", 
+                "replaceValue": "_{page}.html", 
+                "addValue": "{page}.html"
+            }, 
+            "lastPage": {
+                "element": "#pages > a", 
+                "minPageLength": 2, 
+                "attr": "@text", 
+                "descIndex": 2, 
+                "isNeedSplit": false, 
+                "splits": []
+            }
+        }, 
+        "supportReptileVersion": 1
+    },
+    {
+        "name": "7106", 
+        "key":"7160",
+        "url": "https://www.7160.com", 
+        "tags": [
+            {"name": "清纯美女", "url": "https://www.7160.com/qingchunmeinv/list_2_{page}.html"},
+            {"name": "人体艺术", "url": "https://www.7160.com/rentiyishu/list_1_{page}.html"}, 
+            {"name": "美女明星", "url": "https://www.7160.com/meinvmingxing/list_5_{page}.html"} 
+        ], 
+        "pages": {
+            "element": "body > div.container > div.center > div > div.news_bom > div.news_bom-left ul li", 
+            "name": {
+                "element": "a",
+                "attr": "title"
+            },
+            "url": {
+                "element": "a",
+                "attr": "href",
+                "needMerge": true
+            },
+            "nextPageUrlMode": {
+                "mode": "add", 
+                "addValue": ""
+            }, 
+            "lastPage": {
+                "element": "body > div.container > div.center > div > div.news_bom > div.news_bom-left > div > a", 
+                "minPageLength": 2, 
+                "attr": "href", 
+                "descIndex": 1, 
+                "isNeedSplit": true, 
+                "splits": [
+                    {"str":"_","index":2},
+                    {"str":".","index":0}
+                ]
+            }
+        }, 
+        "imgs": {
+            "element": "body > div.container > div.center > div.NEWS > div.picmainer > div.picsbox.picsboxcenter > p > a > img", 
+            "nextPageUrlMode": {
+                "incrementMode": "page",
+                "mode": "add", 
+                "addValue": "index_{page}.html"
+            }, 
+            "lastPage": {
+                "element": "body > div.container > div.center > div.NEWS > div.picmainer > div.itempage > a", 
+                "minPageLength": 2, 
+                "attr": "@text", 
+                "descIndex": 2, 
+                "isNeedSplit": false, 
+                "splits": []
+            }
+        }, 
+        "supportReptileVersion": 1
+    }
+]
