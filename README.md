@@ -41,11 +41,11 @@ GirlsReptile是基于electron-vue开发的美图搜罗器，支持自定义采�
 - [不满足我的需求，我可以自己写采集源吗？当然可以，点我查看文档](https://github.com/Licoy/girls-reptile/wiki/reptile-source-rules)
 ## 使用截图（V2.0.0版本，请以最新版本为准）
 ### Mac
-![mac](./docs/image/mac-1.png?v2)
-![mac](./docs/image/mac-2.png?v2)
+![mac](./docs/image/mac-1-2.0.0.png)
+![mac](./docs/image/mac-2-2.0.0.png)
 ### Windows
-![Windows](./docs/image/win-1.png?v2)
-![Windows](./docs/image/win-2.png?v2)
+![Windows](./docs/image/win-1-2.0.0.png)
+![Windows](./docs/image/win-2-2.0.0.png)
 ## 使用说明
 此项目仅供学习交流使用，请勿使用于商业及非法用途，若违反使用条例请自行承担相关后果
 ## 资源说明
