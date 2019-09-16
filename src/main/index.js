@@ -55,6 +55,30 @@ function createDownloadManager(){
   });
 }
 
+function createMenu(){
+  const template = [{
+    label: 'Edit',
+    submenu: [
+      { label: 'Undo', accelerator: 'CmdOrCtrl+Z', selector: 'undo:' },
+      { label: 'Redo', accelerator: 'Shift+CmdOrCtrl+Z', selector: 'redo:' },
+      { type: 'separator' },
+      { label: 'Cut', accelerator: 'CmdOrCtrl+X', selector: 'cut:' },
+      { label: 'Copy', accelerator: 'CmdOrCtrl+C', selector: 'copy:' },
+      { label: 'Paste', accelerator: 'CmdOrCtrl+V', selector: 'paste:' },
+      { label: 'Select All', accelerator: 'CmdOrCtrl+A', selector: 'selectAll:' },
+      {
+        label: 'Quit',
+        accelerator: 'CmdOrCtrl+Q',
+        click () {
+          app.quit()
+        }
+      }
+    ]
+  }]
+  let menu = Menu.buildFromTemplate(template)
+  Menu.setApplicationMenu(menu)
+}
+
 
 function createDockMenu(mainWindow){
   const dockMenu = Menu.buildFromTemplate([
@@ -126,6 +150,7 @@ function createWindow () {
   if(process.platform != 'win32'){
     createDockMenu(mainWindow)
   }
+  createMenu(mainWindow)
 }
 
 

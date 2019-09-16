@@ -22,13 +22,13 @@
         <div id="main">
         <div>
             <Row>
-                <Col span='12'>
+                <Col span='6'>
                         <RadioGroup v-model="model" type="button">
                         <Radio label="image">图片采集</Radio>
                         <Radio label="video" disabled>视频采集（开发中）</Radio>
                     </RadioGroup>
                 </Col>
-                <Col span='12'>
+                <Col span='18'>
                     <div style="text-align:right">
                         <Tag type="dot" color="success">{{reptile.msgCurrent}}</Tag>
                     </div>
@@ -43,9 +43,9 @@
                             <Option :value="index" :key="index" v-for="(item,index) in originSource">{{ item.name }}</Option>
                         </Select>
                     </FormItem>
-                    <FormItem label='图片分类'>
+                    <FormItem label='图片分类' v-if="originSource.length>0">
                         <Select :disabled="loading" v-model="config.tagIndex" style="width:200px" @on-change="saveConfig">
-                            <Option :value="index" :key="index" v-for="(item,index) in reptile.origin.tags">{{ item.name }}</Option>
+                            <Option :value="index" :key="index" v-for="(item,index) in originSource[config.siteIndex].tags">{{ item.name }}</Option>
                         </Select>
                     </FormItem>
                     <FormItem label='采集延迟(ms)'>
@@ -64,8 +64,10 @@
                                 <span slot="open">开启</span>
                                 <span slot="close">关闭</span>
                             </i-switch>
-                            <Button v-if="!loading" @click="getData" type="success" style="margin-left:10px">立即进行自动采集</Button>
-                            <Button v-else @click="stopRunning" type="error" style="margin-left:10px">立即停止采集</Button>
+                            <Button v-if="!loading" @click="getData" type="success" style="margin-left:10px"><Icon type="md-cloud-download" /> 立即进行自动采集</Button>
+                            <Button v-else @click="stopRunning" type="error" style="margin-left:10px"><Icon type="md-close-circle" /> 立即停止采集</Button>
+                            <Button @click="settingRS('show')" type="primary" style="margin-left:10px"><Icon type="md-cog" /> 设置采集源</Button>
+                            <Button @click="getOriginSource(true)" style="margin-left:10px"><Icon type="md-cog" /> 同步采集源</Button>
                         </template>
                     </FormItem>
                 </Form>
@@ -94,6 +96,27 @@
             <p class="fs14">项目主页：<a @click="openUrl('https://github.com/Licoy/girls-reptile')">https://github.com/Licoy/girls-reptile</a></p>
             <p class="fs14">使用声明：此项目仅供学习交流使用，请勿使用于商业及非法用途，具体条款请参见于项目主页。</p>
         </Modal>
+        <Modal title="采集源设置" v-model="setting.show" width="700px" :mask-closable='false' :closable='false'>
+            <p style="font-size:12px">官方采集源：<a @click="openUrl('https://raw.githubusercontent.com/Licoy/girls-reptile/master/reptile-source.json')"
+                >https://raw.githubusercontent.com/Licoy/girls-reptile/master/reptile-source.json</a></p>
+            <br>
+            <p style="font-size:12px">采集源规则：<a @click="openUrl('https://github.com/Licoy/girls-reptile/wiki/reptile-source-rules')"
+            >https://github.com/Licoy/girls-reptile/wiki/reptile-source-rules</a></p>
+            <br>
+            <p style="font-size:12px">支持版本号：{{$reptileVersion}}（向下兼容）</p>
+            <Divider />
+            <Form :label-width='100'>
+                <FormItem label='采集源地址：'>
+                    <template>
+                        <Input v-model="setting.tempRsUrl" :disabled="loading" placeholder="请输入采集源地址" />
+                    </template>
+                </FormItem>
+            </Form>
+            <div slot="footer" style="text-align:right">
+                <Button @click="settingRS('close')">取消</Button>
+                <Button type="primary" @click="settingRS('save')">确认更新</Button>
+            </div>
+        </Modal>
     </div>
 </template>
 <script>
@@ -113,13 +136,13 @@ export default {
         },
     },
     mixins:[getsMixins],
-    created(){
+    async created(){
         this.version = version
         this.os = process.platform
-        this.$store.commit('STOP');
+        this.$store.commit('STOP')
         this.config = this.$db.get('config').value()
         this.saveConfig(true)
-        this.reptile.origin = this.getSourceTags(this.originSource[this.config.siteIndex].key)
+        await this.getOriginSource(false)
         ipcRenderer.on('download-success', (event, arg) => {
             this.reptile.data[arg.index].status = 1;
         })
@@ -144,30 +167,57 @@ export default {
             os:null,
             loading:false,
             showAbout:false,
-            originSource:[
-                {name:'7106',key:'7106',url:'https://www.7160.com/'},
-                {name:'美图录',key:'meitulu',url:'https://www.meitulu.com/'},
-                {name:'zbjuran',key:'zbjuran',url:'https://www.zbjuran.net/mei/'},
-            ],
+            originSource:[],
             reptile:{
-                origin:{
-                    tags:[]
-                },
                 data:[],
                 msgCurrent:'空闲中'
             },
-            columns:[
-                { title: '采集名称', width:380, dataIndex: 'name', key: 'name'},
-                { title: '链接地址', width:380, dataIndex: 'url', key: 'url'},
-                { title: '操作', width:200, dataIndex: '', key: 'x', scopedSlots: { customRender: 'action' }}
-            ],
-            config:null
+            config:null,
+            setting:{
+                tempRsUrl:null,
+                show:false
+            }
         }
     },
     methods:{
+        async getOriginSource(refresh=false){
+            if(!this.$db.has('origins').value() || refresh===true){
+                let load = this.$Message.loading({
+                    content: '采集源站资源同步中...',
+                    duration: 0
+                });
+                try {
+                    let res = await this.$http.get(this.config.rsUrl);
+                    let rs = []
+                    res.data.forEach(element => {
+                        if(element.supportReptileVersion <= this.$reptileVersion){
+                            rs.push(element)
+                        }
+                    });
+                    this.originSource = rs
+                    this.config.siteIndex = 0
+                    this.config.tagIndex = 0
+                    this.saveConfig()
+                    load()
+                    this.$db.set('origins',rs).write()
+                    this.$Message.success("采集源同步成功")
+                } catch (error) {
+                    load()
+                    console.error(error)
+                    this.$Modal.confirm({
+                        title: '提示',
+                        content: '<p>采集源站资源加载失败，是否进行重新加载？</p><br><p>提示：如果您多次加载失败，请到Github项目主页提交issue。</p>',
+                        onOk: () => {
+                            this.getOriginSource(true)
+                        }
+                    });
+                }
+            }else{
+                this.originSource = this.$db.get('origins').value()
+            }
+        },
         originSourceChange(val){
             this.config.tagIndex = 0
-            this.reptile.origin = this.getSourceTags(this.originSource[this.config.siteIndex].key)
             this.saveConfig()
         },
         selectSaveDir(){
@@ -199,7 +249,7 @@ export default {
         getData(){
             this.$store.commit('RUN');
             try{
-                this.reptile.origin.getPageData(this.reptile.origin.tags[this.config.tagIndex].url, this)
+                this.startReptile(this.originSource[this.config.siteIndex], this.config.tagIndex, this)
             }catch(e){
                 this.$store.commit('STOP');
                 this.$Message.error("采集出错")
@@ -286,6 +336,21 @@ export default {
         },
         openUrl(url){
             shell.openExternal(url)
+        },
+        settingRS(mode){
+            if(mode=='show'){
+                this.setting = {
+                    tempRsUrl: this.config.rsUrl,
+                    show: true
+                }
+            }else if(mode=='close'){
+                this.setting.show = false
+            }else{
+                this.config.rsUrl = this.setting.tempRsUrl
+                this.saveConfig()
+                this.setting.show = false
+                this.getOriginSource(true)
+            }
         }
     }
 }

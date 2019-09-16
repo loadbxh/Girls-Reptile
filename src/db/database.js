@@ -33,6 +33,9 @@ if (!db.has('config').value()) {
   if(config.diffDirectory==undefined){
     config.diffDirectory = true
   }
+  if(config.rsUrl==undefined){
+    config.rsUrl = 'https://raw.githubusercontent.com/Licoy/girls-reptile/master/reptile-source.json'
+  }
   db.set('config',config).write()
 }
 
