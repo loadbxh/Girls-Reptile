@@ -2,7 +2,7 @@
 <div align="center">
     <img src="https://github.com/Licoy/girls-reptile/blob/master/build/icons/256x256.png?raw=true" alt="">
     <h1>GirlsReptile</h1>
-    <p>基于electron-vue开发的美图搜罗器</p>
+    <p>基于electron-vue开发的美图搜罗器，支持自定义采集源站配置，兼容MacOS与Windows操作系统</p>
       <a href="https://travis-ci.org/Licoy/girls-reptile/builds">
         <img src="https://img.shields.io/travis/Licoy/girls-reptile?style=flat-square" alt="">
       </a>
@@ -27,17 +27,19 @@
 </div>
 
 ## 应用介绍
-GirlsReptile是基于electron-vue开发的美图搜罗器
+GirlsReptile是基于electron-vue开发的美图搜罗器，支持自定义采集源站配置，兼容MacOS与Windows操作系统
 ## 下载安装
 您可以[点击此处](https://github.com/Licoy/girls-reptile/releases)进行下载安装，支持Mac/Windows/Linux(未测试)
 ## 开发折腾
 - [《关于在travis-ci以及appveyor条件构建遇到的坑》](https://www.licoy.cn/3385.html)
-## 采集源站
-- [7106图片大全](https://www.7160.com)
+## 官方已适配采集源站
+- [全图网](http://www.quantuwang.co/)
 - [美图录](https://www.meitulu.com)
-- [居然搞笑网](https://www.zbjuran.net)
-- [你有更好的网址？点我提交以支持适配](https://github.com/Licoy/girls-reptile/issues/new)
-## 使用截图（V1.0.0版本，请以最新版本为准）
+- [7106图片大全](https://www.7160.com/)
+## 采集说明
+- [你有更好的网址？点我提交以官方支持适配](https://github.com/Licoy/girls-reptile/issues/new)
+- [不满足我的需求，我可以自己写采集源吗？当然可以，点我查看文档](https://github.com/Licoy/girls-reptile/wiki/reptile-source-rules)
+## 使用截图（V2.0.0版本，请以最新版本为准）
 ### Mac
 ![mac](./docs/image/mac-1.png)
 ![mac](./docs/image/mac-2.png)
