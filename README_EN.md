@@ -41,11 +41,11 @@ You can download and install here by [clicking here](https://github.com/Licoy/gi
 - [Can't I meet my needs, can I write my own collection source? Of course, point me to view the document.](https://github.com/Licoy/girls-reptile/wiki/reptile-source-rules)
 ## Use screenshots (V2.0.0 version, please refer to the latest version)
 ### Mac
-![mac](./docs/image/mac-1.png)
-![mac](./docs/image/mac-2.png)
+![mac](./docs/image/mac-1.png?v2)
+![mac](./docs/image/mac-2.png?v2)
 ### Windows
-![Windows](./docs/image/win-1.png)
-![Windows](./docs/image/win-2.png)
+![Windows](./docs/image/win-1.png?v2)
+![Windows](./docs/image/win-2.png?v2)
 ## Instructions for use
 This project is for learning and communication purposes only. Please do not use it for commercial or illegal purposes. If you violate the usage regulations, please bear the relevant consequences.
 ## Resource description
