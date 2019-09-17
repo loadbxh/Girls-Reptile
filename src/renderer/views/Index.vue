@@ -248,6 +248,7 @@ export default {
         },
         getData(){
             this.$store.commit('RUN');
+            this.reptile.data = []
             try{
                 this.startReptile(this.originSource[this.config.siteIndex], this.config.tagIndex, this)
             }catch(e){

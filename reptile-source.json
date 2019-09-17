@@ -1,5 +1,62 @@
 [
-
+    {
+        "name": "妹子图", 
+        "key":"mzitu",
+        "url": "https://www.mzitu.com", 
+        "tags": [
+            {"name": "最新妹子", "url": "https://www.mzitu.com/"},
+            {"name": "性感妹子", "url": "https://www.mzitu.com/xinggan/"},
+            {"name": "日本妹子", "url": "https://www.mzitu.com/japan/"},
+            {"name": "台湾妹子", "url": "https://www.mzitu.com/taiwan/"},
+            {"name": "清纯妹子", "url": "https://www.mzitu.com/mm/"},
+            {"name": "美女诱惑", "url": "https://www.mzitu.com/tag/youhuo/"},
+            {"name": "黑丝诱惑", "url": "https://www.mzitu.com/tag/heisi/"},
+            {"name": "熟女少妇", "url": "https://www.mzitu.com/tag/shunvshaofu/"},
+            {"name": "情趣SM", "url": "https://www.mzitu.com/tag/sm/"},
+            {"name": "妹子走光", "url": "https://www.mzitu.com/tag/zouguang/"}
+        ], 
+        "pages": {
+            "element": "#pins > li", 
+            "name": {
+                "element": "img",
+                "attr": "alt"
+            },
+            "url": {
+                "element": "span a",
+                "attr": "href",
+                "needMerge": false
+            },
+            "nextPageUrlMode": {
+                "mode": "add",  
+                "addValue": "/page/{page}/"
+            }, 
+            "lastPage": {
+                "element": ".pagination a", 
+                "minPageLength": 2, 
+                "attr": "@text", 
+                "descIndex": 2, 
+                "isNeedSplit": false, 
+                "splits": []
+            }
+        }, 
+        "imgs": {
+            "element": ".main-image img",
+            "nextPageUrlMode": {
+                "incrementMode": "page",
+                "mode": "add", 
+                "addValue": "/{page}"
+            }, 
+            "lastPage": {
+                "element": ".pagenavi a", 
+                "minPageLength": 2, 
+                "attr": "@text", 
+                "descIndex": 2, 
+                "isNeedSplit": false, 
+                "splits": []
+            }
+        }, 
+        "supportReptileVersion": 999
+    },
     {
         "name": "quantuwang", 
         "key":"quantuwang",
@@ -219,5 +276,59 @@
             }
         }, 
         "supportReptileVersion": 1
+    },
+    {
+        "name": "nlegs(需挂代理)", 
+        "key":"nlegs",
+        "url": "http://www.nlegs.com", 
+        "tags": [
+            {"name": "最新", "url": "http://www.nlegs.com"}
+        ], 
+        "pages": {
+            "element": "body > div.container > div:nth-child(2) div", 
+            "name": {
+                "element": ".title",
+                "attr": "@text"
+            },
+            "url": {
+                "element": "a",
+                "attr": "href",
+                "needMerge": true
+            },
+            "nextPageUrlMode": {
+                "mode": "add",  
+                "addValue": "/model/{page}.html"
+            }, 
+            "lastPage": {
+                "element": ".pagination li a", 
+                "minPageLength": 2, 
+                "attr": "@text", 
+                "descIndex": 2, 
+                "isNeedSplit": false, 
+                "splits": []
+            }
+        }, 
+        "imgs": {
+            "element": "body > div.container > div:nth-child(3) > div > div a", 
+            "attr":"href",
+            "singlePage":true,
+            "urlNeedMerge": true,
+            "nextPageUrlMode": {
+                "incrementMode": "page",
+                "mode": "replace", 
+                "replaceSearchValue": ".html", 
+                "replaceValue": "_{page}.html", 
+                "addValue": "{page}.html"
+            }, 
+            "lastPage": {
+                "element": "#pages > a", 
+                "minPageLength": 2, 
+                "attr": "@text", 
+                "descIndex": 2, 
+                "isNeedSplit": false, 
+                "splits": []
+            }
+        }, 
+        "supportReptileVersion": 2
     }
 ]

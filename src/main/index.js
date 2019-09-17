@@ -38,7 +38,6 @@ function createDownloadManager(){
   ipcMain.on('download-button', async (event, {url,name, headers}) => {
     if(!headers) headers = []
     let path = diffDir ? name : '/'
-    console.error('DiffDIR: '+diffDir)
     DownloadManager.bulkDownload({
         urls: [url],
         path: path,

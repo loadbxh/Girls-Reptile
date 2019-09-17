@@ -9,7 +9,7 @@ import db from '../db/database'
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.config.productionTip = false
 Vue.prototype.$db = db
-Vue.prototype.$reptileVersion = 1
+Vue.prototype.$reptileVersion = 2
 
 // Vue.use(ref, { name: 'ant-ref' });
 Vue.use(iView)

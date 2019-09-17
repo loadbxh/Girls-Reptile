@@ -2,6 +2,7 @@ import {get} from "@/config/axios"
 import cheerio from "cheerio"
 const sleep = require("sleepjs")
 const ipcRenderer = require("electron").ipcRenderer;
+import sf from 'string-format';
 
 export default {
     async getPageData(mode,tagIndex,vm,page=1,pageTotal=null){
@@ -54,9 +55,12 @@ export default {
             return;
         }
         try {
+            const singlePage = mode.imgs.singlePage ? mode.imgs.singlePage : false
+            const urlNeedMerge = mode.imgs.urlNeedMerge ? mode.imgs.urlNeedMerge : false
             let incrementMode = mode.imgs.nextPageUrlMode.incrementMode ? mode.imgs.nextPageUrlMode.incrementMode : 'page'
             let imageSuffix = mode.imgs.nextPageUrlMode.imageSuffix ? mode.imgs.nextPageUrlMode.imageSuffix : 'jpg'
             let goUrl = page==1 ? imgItem.url : this.getNextPage(imgItem.url, mode.imgs.nextPageUrlMode)
+            const referer = sf(goUrl, {page:page})
             let res = await get(goUrl,null,{page:page})
             let $ = cheerio.load(res.data)
             if(!pageTotal){
@@ -64,24 +68,32 @@ export default {
             }
             let images = $(mode.imgs.element)
             if(images && images.length>0){
+                const imageAttr = mode.imgs.attr ? mode.imgs.attr : 'src'
                 if(incrementMode=='image'){
                     const element = images[0]
-                    let link = $(element).attr("src")
+                    let link = this.getAttr($(element),imageAttr)
                     for (let linkIndex = 1; linkIndex <= pageTotal; linkIndex++) {
                         let currentLink = link
                         if(linkIndex>1){
                             currentLink = link.replace("1."+imageSuffix, linkIndex+"."+imageSuffix)
                         }
+                        if(urlNeedMerge){
+                            currentLink = mode.url + currentLink
+                        }
                         ipcRenderer.send("download-button", {url:currentLink,name:imgItem.name,headers:[
-                            {name:"Referer", value:mode.url}
+                            {name:"Referer", value: referer},
                         ]})
                     }
                 }else{
                     for (let image_index = 0; image_index < images.length; image_index++) {
                         const element = images[image_index]
-                        let link = $(element).attr("src")
+                        let link = this.getAttr($(element),imageAttr)
+                        if(urlNeedMerge){
+                            link = mode.url + link
+                        }
                         ipcRenderer.send("download-button", {url:link,name:imgItem.name,headers:[
-                            {name:"Referer", value:mode.url}
+                            {name:"Referer", value: referer},
+                            {name:"User-Agent", value:"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36"}
                         ]})
                     }
                 }
@@ -95,7 +107,9 @@ export default {
                 }
                 return;
             }
-            this.getImages(mode,imgItem,index,length,vm,gpage,pageTotal,++page);
+            if(!singlePage){
+                this.getImages(mode,imgItem,index,length,vm,gpage,pageTotal,++page);
+            }
         } catch (error) {
             ipcRenderer.send("download-error", {index:index})
             console.log(error)
